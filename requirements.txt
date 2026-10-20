@@ -1,0 +1,16 @@
+# Core Data Analysis
+pandas
+numpy
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+wordcloud
+
+# Natural Language Processing
+nltk
+
+# Jupyter Environment & Utilities
+jupyter
+tqdm
