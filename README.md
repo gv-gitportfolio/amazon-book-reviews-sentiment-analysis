@@ -13,8 +13,7 @@ Analyze **1.3M+ Amazon book reviews** using Python, NLTK, and VADER.
 
 
 
-markdown
-```
+
 # Amazon Book Reviews Sentiment Analysis
 
 ## Project Overview
