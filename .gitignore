@@ -1,0 +1,23 @@
+# --- Data Files ---
+# Never upload the massive Kaggle CSV data files
+data/*.csv
+data/*.xlsx
+data/*.json
+
+# --- Jupyter Notebook ---
+# Ignore hidden backup checkpoints created automatically by Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# --- Python Environment ---
+# Ignore local virtual environments if you use them
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# --- System Files ---
+# Ignore hidden operating system clutter
+.DS_Store
+Thumbs.db
