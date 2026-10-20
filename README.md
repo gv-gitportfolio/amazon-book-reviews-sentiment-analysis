@@ -89,16 +89,30 @@ amazon-book-reviews-sentiment-analysis/
 
 ## How to Run
 
+1. Clone the repository and open the folder:
+
 ```bash
 git clone https://github.com/<your-username>/amazon-book-reviews-sentiment-analysis.git
 cd amazon-book-reviews-sentiment-analysis
-python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+```
+
+2. Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+3. Download `Books_rating.csv` and `books_data.csv` from [Kaggle](https://www.kaggle.com/datasets/mohamedbakhet/amazon-books-reviews) and place them in the `data/` folder.
+
+4. Launch Jupyter and open the notebook:
+
+```bash
 jupyter notebook
 ```
 
-Download the dataset into `data/`, then open `notebooks/sentiment_analysis.ipynb` and run all cells.
+Open `notebooks/sentiment_analysis.ipynb` and select **Run → Run All Cells**.
+
+> NLTK resources (stopwords, punkt, vader_lexicon, averaged_perceptron_tagger) are downloaded automatically by the notebook's first cell.
 
 ## Limitations
 
