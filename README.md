@@ -1,64 +1,74 @@
 # Amazon Book Reviews Sentiment Analysis
 
-A Python NLP project analyzing **1.3M+ Amazon book reviews** to identify customer sentiment, frequently used words, and review patterns using Python, Pandas, NLTK, and VADER.
+Sentiment analysis of **1.3M+ Amazon book reviews** using Python, Pandas, NLTK, and VADER to uncover how readers feel about books and which words define highly rated reviews.
 
-## Project Overview
+## Business Problem
 
-Customer reviews provide valuable insights into reader preferences and satisfaction. This project applies Natural Language Processing (NLP) and exploratory data analysis to understand sentiment in Amazon book reviews.
+Authors, publishers, and marketers need to understand what readers think at scale. This project turns unstructured review text into measurable insights that can guide marketing strategy, product positioning, and content improvement.
 
-The workflow combines data cleaning, text preprocessing, sentiment classification, exploratory text analysis, and data visualization to transform unstructured review text into meaningful insights.
+## Business Questions
 
-## Key Skills
+1. What are the most common words in reviews rated above 3 stars?
+2. What is the overall sentiment distribution (positive, neutral, negative) across book reviews?
 
-- Python
-- Pandas and NumPy
-- Natural Language Processing (NLP)
-- Sentiment Analysis
-- Data Cleaning and Preprocessing
-- Exploratory Data Analysis (EDA)
-- Text Mining and N-gram Analysis
-- Data Visualization
+## Key Results
 
-## Key Highlights
+| Sentiment | Reviews | Share |
+|---|---|---|
+| Positive | ~1.1M | ~83% |
+| Negative | ~190K | ~14% |
+| Neutral | ~29K | ~2% |
 
-- Processed **1.3M+ Amazon book reviews**, retaining **1,325,890 records** after removing duplicates and missing values.
-- Combined review data with book metadata using Pandas.
-- Applied text preprocessing using regular expressions and NLTK stopwords.
-- Classified reviews as **positive, negative, or neutral** using VADER.
-- Identified the 20 most frequently occurring words in customer reviews.
-- Generated a word cloud using reviews rated above 3 stars.
-- Extracted unigrams, bigrams, and trigrams to explore common words and phrases.
-- Visualized book genre distributions and sentiment patterns across categories.
+- **Dataset size after cleaning:** 1,325,890 reviews
+- **Most frequent words in 3+ star reviews:** *book, read, story, good, great, love, characters, life, time*
+- **Insight:** Readers overwhelmingly respond positively, and praise centers on storytelling and characters. This suggests that narrative quality and character development drive satisfaction.
+- **Negative reviews (~14%)** are a meaningful segment that publishers and authors can mine for improvement areas.
 
-## Research Questions
+## Visualizations
 
-- Which words appear most frequently in book reviews rated above 3 stars?
-- What is the distribution of positive, negative, and neutral sentiment?
-- How does sentiment vary across book categories?
+### Sentiment Distribution
+![Sentiment Distribution](images/sentiment_distribution.png)
+
+### Most Frequent Words (3+ Star Reviews)
+![Frequent Words](images/frequent_words.png)
+
+### Word Cloud
+![Word Cloud](images/word_cloud.png)
+
+## Tools and Skills
+
+- **Python** (Pandas, NumPy)
+- **NLP:** NLTK, VADER, regex text cleaning, tokenization, n-grams, POS tagging
+- **Data Visualization:** Matplotlib, Seaborn, WordCloud
+- **Data Cleaning, EDA, Text Mining**
+- **Jupyter Notebook**
 
 ## Dataset
 
-The project uses an **Amazon Book Reviews dataset from Kaggle**, containing customer reviews, book ratings, titles, authors, categories, and related metadata.
+Source: [Amazon Books Reviews on Kaggle](https://www.kaggle.com/datasets/mohamedbakhet/amazon-books-reviews)
 
-The analysis uses two datasets:
-
-- `Books_rating.csv` — Customer reviews, ratings, and review metadata.
-- `books_data.csv` — Book titles, authors, categories, and related metadata.
-
-### Features Used
-
-| Feature | Description |
+| File | Content |
 |---|---|
-| `Title` | Book title |
-| `review/score` | Customer rating of the book |
-| `review/text` | Written customer review |
-| `authors` | Book author information |
-| `categories` | Book category or genre |
-| `ratingsCount` | Rating-count metadata |
+| `Books_rating.csv` | Customer reviews, ratings, and review metadata |
+| `books_data.csv` | Book titles, authors, categories, and metadata |
 
-The original dataset is not included in this repository because of its size. Download both CSV files from the original Kaggle source before running the notebook.
+**Features used:** `Title`, `review/score`, `review/text`, `authors`, `categories`, `ratingsCount`
 
-**Dataset Source:** [Amazon Book Reviews Dataset on Kaggle](<YOUR-KAGGLE-DATASET-URL>)
+> The raw data is not included due to file size. Download both files from Kaggle and place them in the `data/` folder.
+
+## Methodology
+
+1. **Data Preparation:** Merged reviews with book metadata, removed duplicates and null values, leaving 1,325,890 records.
+2. **Text Preprocessing:** Lowercasing, regex removal of URLs, punctuation, special characters and numbers, NLTK stopword removal, tokenization (`Clean_Text` column).
+3. **Sentiment Scoring:** VADER compound score per review:
+
+| Sentiment | Compound Score |
+|---|---|
+| Positive | `>= 0.05` |
+| Neutral | `> -0.05 and < 0.05` |
+| Negative | `<= -0.05` |
+
+4. **Text Exploration:** Word frequency, word cloud (reviews rated above 3 stars), unigrams, bigrams, trigrams, and POS tags.
 
 ## Project Structure
 
@@ -73,198 +83,43 @@ amazon-book-reviews-sentiment-analysis/
 │   └── README.md
 └── images/
     ├── sentiment_distribution.png
-    ├── word_cloud.png
     ├── frequent_words.png
-    ├── genre_distribution.png
-    └── category_sentiment.png
-README.md — Project documentation and setup instructions.
+    └── word_cloud.png
+```
 
-requirements.txt — Required Python dependencies.
+## How to Run
 
-.gitignore — Files and directories excluded from version control.
-
-notebooks/ — Jupyter notebook containing the analysis.
-
-data/ — Instructions for downloading and preparing the dataset.
-
-images/ — Exported charts and visualizations.
-
-Note: The dataset CSV files are not included in the repository. The chart filenames listed above should match the images you actually export.
-
-Analysis Workflow
-1. Data Preparation
-Merged review data with book metadata using book titles.
-
-Selected relevant review and book attributes.
-
-Removed duplicate records and rows containing missing values.
-
-Retained 1,325,890 reviews after preprocessing.
-
-Calculated review word counts.
-
-2. Text Preprocessing
-Converted review text to lowercase.
-
-Removed URLs, punctuation, special characters, and numeric terms.
-
-Removed English stopwords using NLTK.
-
-Created a cleaned text column named Clean_Text.
-
-3. Sentiment Analysis
-Applied VADER (Valence Aware Dictionary and sEntiment Reasoner), a lexicon-based sentiment analysis tool, to calculate compound sentiment scores for cleaned reviews.
-
-Reviews were classified into three sentiment categories using the following thresholds:
-
-Sentiment
-
-Compound Score
-
-Positive
-
->= 0.05
-
-Neutral
-
-> -0.05 and < 0.05
-
-Negative
-
-<= -0.05
-
-4. Exploratory Text Analysis
-Identified the 20 most frequent words.
-
-Generated a word cloud for reviews rated above 3 stars.
-
-Extracted unigrams, bigrams, and trigrams.
-
-Examined book genre distributions.
-
-Explored sentiment patterns across book categories.
-
-Visualizations
-The following visualizations can be exported from the notebook and saved in the images/ directory.
-
-Sentiment Distribution
-Shows the distribution of positive, negative, and neutral reviews.
-
-Word Cloud
-Highlights frequently occurring words in reviews rated above 3 stars.
-
-Frequent Words
-Displays the most frequently occurring words in customer reviews.
-
-Genre Distribution
-Illustrates the distribution of books across selected categories.
-
-Sentiment by Category
-Compares sentiment counts across book categories.
-
-Key Findings
-Positive sentiment was the largest category in the analyzed dataset.
-
-Frequently occurring words included terms such as book, read, story, good, and love.
-
-Word-frequency analysis helped identify recurring themes in highly rated reviews.
-
-Sentiment visualizations provided an overview of customer opinions.
-
-Category-based analysis enabled exploration of sentiment patterns across book genres.
-
-Refer to the notebook's calculated results and visualizations for exact sentiment counts and distributions.
-
-Technologies Used
-Python — Core programming language.
-
-Pandas and NumPy — Data manipulation and analysis.
-
-NLTK — Natural language processing and stopword removal.
-
-VADER — Lexicon-based sentiment analysis.
-
-Regular Expressions (Regex) — Text cleaning and pattern matching.
-
-Matplotlib and Seaborn — Data visualization.
-
-WordCloud — Word cloud generation.
-
-Jupyter Notebook — Interactive analysis and experimentation.
-
-Getting Started
-Prerequisites
-Python 3.9 or later
-
-pip
-
-Jupyter Notebook
-
-Amazon book reviews dataset
-
-Installation
-1. Clone the repository
-
-
-bash
-git clone <YOUR-REPOSITORY-URL>
+```bash
+git clone https://github.com/<your-username>/amazon-book-reviews-sentiment-analysis.git
 cd amazon-book-reviews-sentiment-analysis
-2. Create a virtual environment
-
-
-bash
 python -m venv .venv
-3. Activate the virtual environment
-
-Windows:
-
-
-bash
-.venv\Scripts\activate
-macOS or Linux:
-
-
-bash
-source .venv/bin/activate
-4. Install dependencies
-
-
-bash
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-5. Download the dataset
-
-Download Books_rating.csv and books_data.csv from the Kaggle source linked above.
-
-Place both files in the data/ directory and update the notebook file paths if necessary.
-
-6. Launch Jupyter Notebook
-
-
-bash
 jupyter notebook
-Open notebooks/sentiment_analysis.ipynb and execute the cells to reproduce the analysis.
+```
 
-Limitations
-VADER may struggle with sarcasm, contextual meaning, and domain-specific language.
+Download the dataset into `data/`, then open `notebooks/sentiment_analysis.ipynb` and run all cells.
 
-Processing large datasets can require substantial memory and computation time.
+## Limitations
 
-Removing punctuation and stopwords may discard useful contextual information.
+- VADER can misread sarcasm, irony, and book-specific vocabulary.
+- Reviews with mixed positive and negative points are hard to classify.
+- Removing stopwords and punctuation may discard useful context (e.g., negations).
+- Labels are lexicon-based and were not validated against manually labeled data.
+- Large data volume (1.3M+ rows) demands significant memory and processing time.
 
-Sentiment classifications are lexicon-based predictions and may not always match the reviewer's intended meaning.
+## Future Improvements
 
-Future Improvements
-Compare VADER with machine learning and transformer-based sentiment models.
+- Compare VADER with transformer models (BERT/RoBERTa).
+- Validate sentiment against star ratings (`review/score`).
+- Analyze sentiment by book category/genre.
+- Apply topic modeling to negative reviews.
+- Build an interactive Power BI/Tableau dashboard.
 
-Evaluate sentiment predictions against manually labeled reviews.
+## References
 
-Apply topic modeling to identify recurring themes in book reviews.
+- Hutto, C. J., & Gilbert, E. (2014). *VADER: A Parsimonious Rule-Based Model for Sentiment Analysis of Social Media Text.* ICWSM.
 
-Develop an interactive dashboard to explore sentiment by book category.
+## Author
 
-Optimize text preprocessing and sentiment analysis for large datasets.
-
-References
-Hutto, C. J., & Gilbert, E. (2014). VADER: A Parsimonious Rule-Based Model for Sentiment Analysis of Social Media Text. Proceedings of the International AAAI Conference on Web and Social Media.
-
-Kaggle — Amazon Book Reviews Dataset. See the dataset link above.
+**<Your Name>** | [LinkedIn](<your-linkedin-url>) | [GitHub](<your-github-url>) | <your-email>
