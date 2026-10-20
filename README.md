@@ -1,3 +1,18 @@
+# Amazon Book Reviews Sentiment Analysis
+
+## Project Overview
+
+Analyze **1.3M+ Amazon book reviews** using Python, NLTK, and VADER.
+
+## Key Skills
+
+- Python
+- Data Analysis
+- Natural Language Processing
+- Sentiment Analysis
+
+
+
 Amazon Book Reviews Sentiment Analysis
 
 A Python NLP project analyzing 1.3M+ Amazon book reviews to identify customer sentiment, frequently used words, and review patterns using NLTK and VADER.
